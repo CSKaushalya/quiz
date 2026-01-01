@@ -1,16 +1,29 @@
-# React + Vite
+# 🧠 React Quiz Master
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic, responsive Quiz Application built with **React**, **Vite**, and **Bootstrap**. This project features a randomized question order, a real-time countdown timer, and a progress tracking system.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **🔀 Question Shuffling**: Uses the Fisher-Yates algorithm to ensure a unique experience every time you play.
+* **⏳ Real-time Timer**: 10-second countdown per question to add challenge.
+* **📊 Progress Tracking**: Visual progress bar showing your current position in the quiz.
+* **📱 Responsive UI**: Built with Bootstrap 5 for a mobile-friendly experience.
+* **🔄 Instant Feedback**: Score summary and "Play Again" functionality.
 
-## Expanding the ESLint configuration
+## 🚀 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Framework**: React 18
+* **Build Tool**: Vite
+* **Styling**: Bootstrap 5 & CSS3
+* **State Management**: React Hooks (`useState`, `useEffect`)
+
+## 🛠️ Installation & Setup
+
+Follow these steps to run the project locally:
+
+1. **Clone the repository**
+   ```bash
+   git clone [https://github.com/CSKaushalya/quiz.git](https://github.com/CSKaushalya/quiz.git)
+   cd quiz-app
