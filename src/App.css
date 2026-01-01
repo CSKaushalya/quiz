@@ -1,27 +1,43 @@
+/* App.css */
 body {
-  background-color: #212529;
+  background-color: #1a1d20; /* Thawa poddak dark kala lassanata penna */
   color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* Heading eka lassanata hadamu */
 .app-title {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Container eka screen eke madata align wenna */
 .quiz-container {
-  width: 100%;
-  max-width: 600px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px); /* Glass effect ekak enna */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
+/* Timer ekata podi animation ekak */
 .text-danger {
-  animation: shake 0.5s linear infinite;
+  animation: pulse 1s infinite;
 }
 
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  50% { transform: translateX(2px); }
-  100% { transform: translateX(0); }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: white;
 }
