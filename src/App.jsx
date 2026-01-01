@@ -6,17 +6,33 @@ import Question from './components/Question';
 import Score from './components/Score';
 
 function App() {
+  const [questions, setQuestions] = useState([]); // Holds the shuffled list
   const [currentIdx, setCurrentIdx] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10); // 10 seconds per question
+  const [timeLeft, setTimeLeft] = useState(10);
 
-  // Timer logic using useEffect
+  // Function to shuffle the question bank
+  const shuffleQuestions = (array) => {
+    let shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Initialize shuffled questions on first load
   useEffect(() => {
-    if (showScore) return;
+    setQuestions(shuffleQuestions(qBank));
+  }, []);
+
+  // Timer logic
+  useEffect(() => {
+    if (showScore || questions.length === 0) return;
 
     if (timeLeft === 0) {
-      handleAnswerClick(null); // Automatically move to next if time runs out
+      handleAnswerClick(null);
       return;
     }
 
@@ -25,36 +41,40 @@ function App() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, showScore]);
+  }, [timeLeft, showScore, questions]);
 
   const handleAnswerClick = (selectedOption) => {
-    if (selectedOption === qBank[currentIdx].answer) {
+    if (selectedOption === questions[currentIdx].answer) {
       setScore(score + 1);
     }
 
     const nextQuestion = currentIdx + 1;
-    if (nextQuestion < qBank.length) {
+    if (nextQuestion < questions.length) {
       setCurrentIdx(nextQuestion);
-      setTimeLeft(10); // Reset timer for new question
+      setTimeLeft(10);
     } else {
       setShowScore(true);
     }
   };
 
   const restartQuiz = () => {
+    setQuestions(shuffleQuestions(qBank)); // Reshuffle for new attempt
     setScore(0);
     setCurrentIdx(0);
     setShowScore(false);
     setTimeLeft(10);
   };
 
-  const progress = ((currentIdx + 1) / qBank.length) * 100;
+  // Prevent rendering before questions are shuffled
+  if (questions.length === 0) return <div className="text-white text-center mt-5">Loading Quiz...</div>;
+
+  const progress = ((currentIdx + 1) / questions.length) * 100;
 
   return (
     <div className="container mt-5 d-flex flex-column align-items-center">
       <h1 className="app-title mb-4">React Quiz Master</h1>
 
-      <div className="quiz-container">
+      <div className="quiz-container w-100" style={{ maxWidth: '600px' }}>
         {!showScore && (
           <>
             <div className="progress mb-3 bg-secondary" style={{ height: "25px" }}>
@@ -62,7 +82,7 @@ function App() {
                 className="progress-bar progress-bar-striped progress-bar-animated bg-primary" 
                 style={{ width: `${progress}%` }}
               >
-                Question {currentIdx + 1} / {qBank.length}
+                Question {currentIdx + 1} / {questions.length}
               </div>
             </div>
 
@@ -75,10 +95,10 @@ function App() {
         )}
 
         {showScore ? (
-          <Score score={score} total={qBank.length} handleRestart={restartQuiz} />
+          <Score score={score} total={questions.length} handleRestart={restartQuiz} />
         ) : (
           <Question 
-            question={qBank[currentIdx]} 
+            question={questions[currentIdx]} 
             handleAnswerClick={handleAnswerClick} 
           />
         )}
