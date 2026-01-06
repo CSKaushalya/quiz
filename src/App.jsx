@@ -66,7 +66,7 @@ function App() {
     // min-vh-100 dammama mulu screen ekama gannawa. 
     // d-flex flex-column justify-content-center align-items-center classes walin madata gannawa.
     <div className="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center py-4">
-      <h1 className="app-title mb-4 text-center">REACT QUIZ MASTER</h1>
+      <h1 className="app-title mb-4 text-center">QUIZ MASTER</h1>
 
       <div className="quiz-container w-100" style={{ maxWidth: '650px' }}>
         {!showScore && (
